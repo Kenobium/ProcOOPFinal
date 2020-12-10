@@ -1,0 +1,63 @@
+
+u
+java:S1104"ZMake contrastButton a static final constant or non-public and provide accessors if needed.(ìËÁ¨ıÿÿÿÿ
+T	java:S106Ë"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ
+]
+java:S2142Œ"FEither re-interrupt this method or rethrow the "InterruptedException".(ò¶È
+I
+java:S1172°"2Remove this unused method parameter "actionEvent".(ÑµŞ•
+M
+java:S1172t"2Remove this unused method parameter "actionEvent".(ëÔìıÿÿÿÿ
+M
+java:S1172U"2Remove this unused method parameter "actionEvent".(°¢™çıÿÿÿÿ
+T	java:S106É"9Replace this use of System.out or System.err by a logger.(šêª‚şÿÿÿÿ
+]
+java:S2142ª"FEither re-interrupt this method or rethrow the "InterruptedException".(ò¶È
+H
+java:S1172e"2Remove this unused method parameter "actionEvent".(µ¾¶€
+m
+java:S1104"WMake noiseButton a static final constant or non-public and provide accessors if needed.(ŒÂ¸Æ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(í‹¦ùÿÿÿÿ
+v
+java:S1104"[Make posterizeButton a static final constant or non-public and provide accessors if needed.(õÚ‚»şÿÿÿÿ
+O	java:S106Å"9Replace this use of System.out or System.err by a logger.(ÛÚ×²
+r
+java:S1104!"WMake beforeLabel a static final constant or non-public and provide accessors if needed.(Ñƒ½ûÿÿÿÿ
+\
+java:S2142}"FEither re-interrupt this method or rethrow the "InterruptedException".(ò¶È
+]
+java:S2142›"FEither re-interrupt this method or rethrow the "InterruptedException".(ò¶È
+R
+java:S3655J"7Call "Optional#isPresent()" before accessing the value.(‡³ËÕûÿÿÿÿ
+S	java:S106L"9Replace this use of System.out or System.err by a logger.(üšÃüùÿÿÿÿ
+p
+java:S1104"UMake beforeImg a static final constant or non-public and provide accessors if needed.(í§íúÿÿÿÿ
+N
+java:S1172¡"2Remove this unused method parameter "actionEvent".(¿Šó‡ûÿÿÿÿ
+s
+java:S1104"XMake invertButton a static final constant or non-public and provide accessors if needed.(ş‡†–ùÿÿÿÿ
+l
+java:S1104"VMake blurButton a static final constant or non-public and provide accessors if needed.(ùñê¿
+\
+java:S2142^"FEither re-interrupt this method or rethrow the "InterruptedException".(ò¶È
+N
+java:S1172ƒ"2Remove this unused method parameter "actionEvent".(èªó‡ıÿÿÿÿ
+o
+java:S1104 "TMake afterImg a static final constant or non-public and provide accessors if needed.(¬²âûÿÿÿÿ
+q
+java:S1104""VMake afterLabel a static final constant or non-public and provide accessors if needed.(•±õŠúÿÿÿÿ
+\
+java:S2142n"FEither re-interrupt this method or rethrow the "InterruptedException".(ò¶È
+N
+java:S1172’"2Remove this unused method parameter "actionEvent".(ÀâÓÚûÿÿÿÿ
+T	java:S106Ç"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ
+k
+java:S1104"VMake openButton a static final constant or non-public and provide accessors if needed.(¼İû:
+j
+java:S1104"TMake pathText a static final constant or non-public and provide accessors if needed.(¥å³Ú
+q
+java:S1104"[Make greyscaleButton a static final constant or non-public and provide accessors if needed.(†íÇŠ
+]
+java:S2142¹"FEither re-interrupt this method or rethrow the "InterruptedException".(ò¶È
+l
+java:S1104"VMake edgeButton a static final constant or non-public and provide accessors if needed.(“§çŠ

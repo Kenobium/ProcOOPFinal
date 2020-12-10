@@ -1,8 +1,6 @@
 package tk.thesenate.JPhotoEdit;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -13,13 +11,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
 import java.io.*;
+import java.net.Authenticator;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.*;
+import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.*;
 import java.util.Optional;
 
 public class Main extends Application {
@@ -42,6 +46,7 @@ public class Main extends Application {
     public Slider slider0;
     public Label factorLabel;
     public Label factorNumLabel;
+    public Button uploadButton;
     private String imgPath;
     private String imgFormat;
     private boolean imgSelected;
@@ -289,4 +294,20 @@ public class Main extends Application {
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
     }
 
+    public void upload(ActionEvent actionEvent) {
+        HttpClient client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://ptsv2.com/t/society/post"))
+                .POST(BodyPublishers.ofString("hello there"))
+                .build();
+        try {
+            HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+            System.out.println(response.body());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
