@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,41 +10,42 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="550.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesenate.JPhotoEdit.Main">
-   <children>
-      <Pane prefHeight="54.0" prefWidth="826.0">
-         <children>
-            <Button fx:id="openButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#load" text="Open Image" />
-            <TextField fx:id="pathText" layoutX="106.0" layoutY="14.0" prefHeight="25.0" prefWidth="700.0" promptText="Path" />
-         </children></Pane>
-      <Pane layoutY="54.0" prefHeight="347.0" prefWidth="825.0">
-         <children>
-            <VBox layoutX="14.0" layoutY="18.0" prefHeight="312.0" prefWidth="113.0" spacing="15.0">
-               <children>
-                  <Button fx:id="blurBackgroundButton" layoutX="10.0" layoutY="255.0" mnemonicParsing="false" onAction="#blurBackground" prefHeight="25.0" prefWidth="129.0" text="Blur Background" />
-                  <Button fx:id="blurButton" mnemonicParsing="false" onAction="#blur" prefHeight="26.0" prefWidth="153.0" text="Blur" />
-                  <Button fx:id="contourButton" layoutX="10.0" layoutY="51.0" mnemonicParsing="false" onAction="#contour" prefHeight="26.0" prefWidth="153.0" text="Contour" />
-                  <Button fx:id="contrastButton" mnemonicParsing="false" onAction="#contrast" prefHeight="26.0" prefWidth="157.0" text="Contrast" />
-                  <Button fx:id="edgeButton" mnemonicParsing="false" onAction="#edge" prefHeight="26.0" prefWidth="144.0" text="Highlight Edges" />
-                  <Button fx:id="greyscaleButton" layoutX="10.0" layoutY="138.0" mnemonicParsing="false" onAction="#greyscale" prefHeight="26.0" prefWidth="150.0" text="Greyscale" />
-                  <Button fx:id="invertButton" mnemonicParsing="false" onAction="#invert" prefHeight="26.0" prefWidth="143.0" text="Invert Colors" />
-                  <Button fx:id="noiseButton" mnemonicParsing="false" onAction="#noise" prefHeight="26.0" prefWidth="148.0" text="Reduce Noise" />
-                  <Button fx:id="posterizeButton" mnemonicParsing="false" onAction="#posterize" prefHeight="26.0" prefWidth="138.0" text="Posterize" />
-                  <Button fx:id="sharpenButton" layoutX="10.0" layoutY="336.0" mnemonicParsing="false" onAction="#sharpen" prefHeight="26.0" prefWidth="138.0" text="Sharpen" />
-               </children>
-            </VBox>
-            <ImageView fx:id="beforeImg" fitHeight="230.0" fitWidth="256.0" layoutX="179.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="afterImg" fitHeight="230.0" fitWidth="256.0" layoutX="515.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="beforeLabel" layoutX="293.0" layoutY="18.0" text="Input" />
-            <Label fx:id="afterLabel" layoutX="624.0" layoutY="18.0" text="Output" />
-         </children>
-      </Pane>
-      <Pane layoutX="7.0" layoutY="441.0" prefHeight="110.0" prefWidth="819.0">
-         <children>
-            <Button fx:id="uploadButton" layoutX="687.0" layoutY="56.0" mnemonicParsing="false" onAction="#upload" text="Upload to Gallery" />
-            <Label fx:id="factorLabel" layoutX="146.0" layoutY="47.0" text="Factor:" />
-            <TextField fx:id="factorText" disable="true" layoutX="192.0" layoutY="43.0" promptText="Number" />
-            <Button fx:id="saveButton" layoutX="687.0" layoutY="22.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="108.0" text="Save" />
-         </children>
-      </Pane>
-   </children>
+    <children>
+        <Pane prefHeight="54.0" prefWidth="826.0">
+            <children>
+                <Button fx:id="openButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#load" text="Open Image" />
+                <TextField fx:id="pathText" layoutX="106.0" layoutY="14.0" prefHeight="25.0" prefWidth="700.0" promptText="Path" />
+            </children>
+        </Pane>
+        <Pane layoutY="54.0" prefHeight="347.0" prefWidth="825.0">
+            <children>
+                <VBox layoutX="14.0" layoutY="18.0" prefHeight="312.0" prefWidth="113.0" spacing="15.0">
+                    <children>
+                        <Button fx:id="blurBackgroundButton" layoutX="10.0" layoutY="255.0" mnemonicParsing="false" onAction="#blurBackground" prefHeight="25.0" prefWidth="129.0" text="Blur Background" />
+                        <Button fx:id="blurButton" mnemonicParsing="false" onAction="#blur" prefHeight="26.0" prefWidth="153.0" text="Blur" />
+                        <Button fx:id="contourButton" layoutX="10.0" layoutY="51.0" mnemonicParsing="false" onAction="#contour" prefHeight="26.0" prefWidth="153.0" text="Contour" />
+                        <Button fx:id="contrastButton" mnemonicParsing="false" onAction="#contrast" prefHeight="26.0" prefWidth="157.0" text="Contrast" />
+                        <Button fx:id="edgeButton" mnemonicParsing="false" onAction="#edge" prefHeight="26.0" prefWidth="144.0" text="Highlight Edges" />
+                        <Button fx:id="greyscaleButton" layoutX="10.0" layoutY="138.0" mnemonicParsing="false" onAction="#greyscale" prefHeight="26.0" prefWidth="150.0" text="Greyscale" />
+                        <Button fx:id="invertButton" mnemonicParsing="false" onAction="#invert" prefHeight="26.0" prefWidth="143.0" text="Invert Colors" />
+                        <Button fx:id="noiseButton" mnemonicParsing="false" onAction="#noise" prefHeight="26.0" prefWidth="148.0" text="Reduce Noise" />
+                        <Button fx:id="posterizeButton" mnemonicParsing="false" onAction="#posterize" prefHeight="26.0" prefWidth="138.0" text="Posterize" />
+                        <Button fx:id="sharpenButton" layoutX="10.0" layoutY="336.0" mnemonicParsing="false" onAction="#sharpen" prefHeight="26.0" prefWidth="138.0" text="Sharpen" />
+                    </children>
+                </VBox>
+                <ImageView fx:id="beforeImg" fitHeight="230.0" fitWidth="256.0" layoutX="179.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="afterImg" fitHeight="230.0" fitWidth="256.0" layoutX="515.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="beforeLabel" layoutX="293.0" layoutY="18.0" text="Input" />
+                <Label fx:id="afterLabel" layoutX="624.0" layoutY="18.0" text="Output" />
+            </children>
+        </Pane>
+        <Pane layoutX="7.0" layoutY="441.0" prefHeight="110.0" prefWidth="819.0">
+            <children>
+                <Button fx:id="uploadButton" layoutX="687.0" layoutY="52.0" mnemonicParsing="false" onAction="#upload" text="Upload to Gallery" />
+                <Label fx:id="factorLabel" layoutX="14.0" layoutY="47.0" prefHeight="17.0" prefWidth="108.0" text="Factor:" />
+                <Slider fx:id="slider" blockIncrement="0.5" disable="true" layoutX="183.0" layoutY="42.0" max="10.0" min="1.0" prefHeight="26.0" prefWidth="417.0" value="1.5" />
+                <Button fx:id="saveButton" layoutX="687.0" layoutY="22.0" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="108.0" text="Save" />
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>

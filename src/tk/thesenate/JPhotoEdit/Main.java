@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -25,6 +26,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.*;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.*;
+import java.text.DecimalFormat;
 import java.util.Optional;
 
 public class Main extends Application {
@@ -46,14 +48,14 @@ public class Main extends Application {
     public Button sharpenButton;
     public Label factorLabel;
     public Button uploadButton;
-    public TextField factorText = new TextField();
+    public Slider slider;
     public Button saveButton;
     private String imgPath;
     private String imgFormat;
     private boolean imgSelected;
-    private boolean crShowsDefault = true;
-    private Image toSave;
     private double factor;
+    private String util;
+    private Image toSave;
 
     public static void main(String[] args) {
         launch(args);
@@ -61,16 +63,16 @@ public class Main extends Application {
 
     @FXML
     public void initialize() {
-        factorText.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*(\\.\\d*)?")) {
-                factorText.setText(oldValue);
+        slider.valueChangingProperty().addListener((observableValue, aBoolean, t1) -> {
+            factor = slider.getValue();
+            DecimalFormat df = new DecimalFormat("##.##");
+            factorLabel.setText("Factor: " + df.format(factor));
+            switch (util) {
+                case "cr" -> contrast(new ActionEvent());
+                case "p" -> posterize(new ActionEvent());
             }
-        });
 
-        factorText.setOnAction((actionEvent -> {
-            factor = Double.parseDouble(factorText.getText());
-            contrast(new ActionEvent());
-        }));
+        });
     }
 
     @Override
@@ -119,24 +121,27 @@ public class Main extends Application {
                 e.printStackTrace();
             }
             imgSelected = true;
+            slider.setDisable(false);
         }
 
     }
 
     public void save(ActionEvent actionEvent) {
-        Node node = (Node) actionEvent.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save");
-        fileChooser.getExtensionFilters().addAll(
-                new ExtensionFilter("Image Files", "*.png", "*.jpg"),
-                new ExtensionFilter("All Files", "*.*")
-        );
-        File initial = new File(imgPath);
-        fileChooser.setInitialDirectory(new File(initial.getParent()));
-        fileChooser.setInitialFileName(initial.getName());
-        File f = fileChooser.showSaveDialog(stage);
-        imgToFile(toSave, imgFormat, f);
+        if (toSave != null) {
+            Node node = (Node) actionEvent.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save");
+            fileChooser.getExtensionFilters().addAll(
+                    new ExtensionFilter("Image Files", "*.png", "*.jpg"),
+                    new ExtensionFilter("All Files", "*.*")
+            );
+            File initial = new File(imgPath);
+            fileChooser.setInitialDirectory(new File(initial.getParent()));
+            fileChooser.setInitialFileName(initial.getName());
+            File f = fileChooser.showSaveDialog(stage);
+            imgToFile(toSave, imgFormat, f);
+        }
     }
 
     public void blurBackground(ActionEvent actionEvent) {
@@ -191,12 +196,8 @@ public class Main extends Application {
     public void contrast(ActionEvent actionEvent) {
         if (imgSelected) {
             try {
-                factorText.setDisable(false);
-                if (crShowsDefault) {
-                    factor = 1.6;
-                    factorText.setText(String.valueOf(factor));
-                    crShowsDefault = false;
-                }
+                util = "cr";
+                slider.setMax(10);
                 Process p = Runtime.getRuntime().exec("python ./src/img/Contrast.py " + imgPath + " " + factor);
                 showOutput(p);
                 p.waitFor();
@@ -277,7 +278,9 @@ public class Main extends Application {
     public void posterize(ActionEvent actionEvent) {
         if (imgSelected) {
             try {
-                Process p = Runtime.getRuntime().exec("python ./src/img/Posterize.py " + imgPath);
+                util = "p";
+                slider.setMax(8);
+                Process p = Runtime.getRuntime().exec("python ./src/img/Posterize.py " + imgPath + " " + factor);
                 showOutput(p);
                 p.waitFor();
                 FileInputStream f = new FileInputStream("./cache/p_temp." + imgFormat);
@@ -306,6 +309,12 @@ public class Main extends Application {
         }
     }
 
+    /*public void slider0drag(MouseEvent dragEvent) {
+        System.out.println("aaa");
+        factor = slider0.getValue();
+        factorNumLabel.setText(String.valueOf(factor));
+    }*/
+
     private void showOutput(Process p) throws IOException {
         InputStreamReader out = new InputStreamReader(p.getInputStream());
         InputStreamReader err = new InputStreamReader(p.getErrorStream());
@@ -332,14 +341,6 @@ public class Main extends Application {
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
     }
 
-    private void imgToFile(Image image, String format, File file) {
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(image, null), format, file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void upload(ActionEvent actionEvent) {
         HttpClient client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
@@ -357,5 +358,11 @@ public class Main extends Application {
 
     }
 
-
+    private void imgToFile(Image image, String format, File file) {
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), format, file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
