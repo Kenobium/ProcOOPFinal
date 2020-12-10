@@ -1,7 +1,7 @@
 # JPhotoEdit
 Our application is a simple yet powerful image editor that can give you the ability to manipulate your images with just the click of a button.
 
-In order to run this application, open the program [].java and click run.
+In order to run this application, open the program Main.java and click run.
 
 Now, click upload and select your image of choice.
 
