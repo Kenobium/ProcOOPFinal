@@ -1,7 +1,8 @@
 # JPhotoEdit
 Our application is a simple yet powerful image editor that can give you the ability to manipulate your images with just the click of a button.
 
-In order to run this application, open the program Main.java and click run.
+In order to run this application, navigate to src/main/java/tk/thesenate/EditJt/ and execute this command:
+`--module-path C:/Users/Dhruv/IdeaProjects/Final/javafx-sdk-15.0.1/lib --add-modules javafx.controls,javafx.fxml --add-exports javafx.graphics/com.sun.javafx.sg.prism=ALL-UNNAMED`
 
 Now, click upload and select your image of choice.
 
