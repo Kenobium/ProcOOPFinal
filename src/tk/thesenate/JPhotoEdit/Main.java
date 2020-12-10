@@ -1,8 +1,6 @@
 package tk.thesenate.JPhotoEdit;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
@@ -22,14 +19,12 @@ import javafx.scene.image.ImageView;
 
 import javax.imageio.ImageIO;
 import java.io.*;
-import java.net.Authenticator;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.*;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.*;
-import java.nio.file.Files;
 import java.util.Optional;
 
 public class Main extends Application {
@@ -56,7 +51,7 @@ public class Main extends Application {
     private String imgPath;
     private String imgFormat;
     private boolean imgSelected;
-    private boolean canSave;
+    private boolean crShowsDefault = true;
     private Image toSave;
     private double factor;
 
@@ -197,8 +192,11 @@ public class Main extends Application {
         if (imgSelected) {
             try {
                 factorText.setDisable(false);
-                factor = 1.6;
-                factorText.setText(String.valueOf(factor));
+                if (crShowsDefault) {
+                    factor = 1.6;
+                    factorText.setText(String.valueOf(factor));
+                    crShowsDefault = false;
+                }
                 Process p = Runtime.getRuntime().exec("python ./src/img/Contrast.py " + imgPath + " " + factor);
                 showOutput(p);
                 p.waitFor();
@@ -308,12 +306,6 @@ public class Main extends Application {
         }
     }
 
-    /*public void slider0drag(MouseEvent dragEvent) {
-        System.out.println("aaa");
-        factor = slider0.getValue();
-        factorNumLabel.setText(String.valueOf(factor));
-    }*/
-
     private void showOutput(Process p) throws IOException {
         InputStreamReader out = new InputStreamReader(p.getInputStream());
         InputStreamReader err = new InputStreamReader(p.getErrorStream());
@@ -340,13 +332,12 @@ public class Main extends Application {
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
     }
 
-    private File imgToFile(Image image, String format, File file) {
+    private void imgToFile(Image image, String format, File file) {
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), format, file);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return file;
     }
 
     public void upload(ActionEvent actionEvent) {
